@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -23,12 +24,12 @@
 			<div class="navbar-collapse collapse" id="navbar-main">
 				<form class="navbar-form navbar-right" rol="search" action="">
 					<div class="form-group">
-						<input type="text" class="form-control" name="id" placeholder="Username">
+						<input type="text" class="form-control" id="member_id" name="member_id" placeholder="Username">
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" name="password" placeholder="Password">
+						<input type="password" class="form-control" id="member_password" name="member_password" placeholder="Password">
 					</div>
-					<input type="submit" class="btn btn-default" value="로그인"></button>
+					<input type="submit" class="btn btn-primary form-control" value="로그인" id="btn_login" name="btn_login"></button>
 				</form>
 			</div>
 		</center>
@@ -71,5 +72,22 @@
 			<button class="btn btn-normal pull-right" id="insert" onclick="">쓰기</button>
 		</div>
 	</div>	
+	<script>
+		$("#btn_login").on("click", function(){
+			var member_id = $("#member_id").val();
+			var member_password = $("#member_password").val();
+			$.ajax({
+				url : "/selectMemberInfo.do",
+				data : { member_id : member_id, member_password : member_password },
+				dataType : "html",
+				error : function(data){					
+					alert("로그인이 실패하였습니다.");
+				},
+				success : function(data){
+					alert("로그인이 성공하였습니다.");
+				}
+			});
+		});
+	</script>
 </body>
 </html>
