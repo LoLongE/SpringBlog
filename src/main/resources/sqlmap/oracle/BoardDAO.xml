@@ -8,7 +8,7 @@
 	</select>
 
 
-	<select id="selectBoardTest02" parameterType="Map" resultType="Map">
+	<select id="selectBoardTest01" parameterType="Map" resultType="Map">
 		SELECT * 
 		  FROM ( SELECT  BOARD_NO
                         ,BOARD_TITLE
@@ -28,6 +28,14 @@
 		SELECT * 
 		  FROM ( SELECT  BOARD_NO
                         ,BOARD_TITLE
+                        ,BOARD_CONTENT
+                        ,BOARD_REGIST_ID
+                        ,BOARD_REGIST_DATE
+                        ,BOARD_MODIFY_ID
+                        ,BOARD_MODIFY_DATE
+                        ,BOARD_READ_COUNT
+                        ,BOARD_STATUS
+                        ,BOARD_TYPE
                         ,ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) rn 
                         ,COUNT(1) OVER() totalCount
                    FROM BOARD )

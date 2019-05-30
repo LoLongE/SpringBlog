@@ -35,18 +35,16 @@ public class BoardController {
 		System.out.println("get0 : " + result.get(0));
 		System.out.println("get1 : " + result.get(1));
 		System.out.println("get2 : " + result.get(2));
-		
 
 		Map<String,Object> paramMap = new HashMap<String,Object>();
 		List<Map<String,Object>> listMap01 = boardService.selectBoardTest01(paramMap);
 		
 		List<Map<String,Object>> listMap02 = boardService.selectBoardTest02(paramMap);
 		System.out.println(listMap02);
+		System.out.println(listMap02.size());
 		System.out.println(listMap02.get(0).get("rn"));
+		System.out.println(listMap02.get(0).get("totalCount"));
 		System.out.println(listMap02.get(0).get("BoardVO"));
-		
-		
-		
 		
 		return "board/boardList";
 	}
