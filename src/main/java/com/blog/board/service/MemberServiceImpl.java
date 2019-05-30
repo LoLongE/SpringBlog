@@ -13,8 +13,8 @@ public class MemberServiceImpl implements MemberService {
 	@Resource(name="MemberDAO")
 	private MemberDAO memberDAO;
 	
-	public MemberVO selectMemberInfo(MemberVO memberVO)
+	public MemberVO selectLoginView(MemberVO memberVO)
 	{
-		return this.memberDAO.selectMemberInfo(memberVO);
+		return this.memberDAO.selectLoginView(memberVO);
 	}
 }

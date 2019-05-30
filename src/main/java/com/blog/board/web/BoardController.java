@@ -21,15 +21,12 @@ public class BoardController {
 	
 	@RequestMapping(value="/selectBoardList.do")
 	public String selectBoardList(Model model,
-			@ModelAttribute("boardVO") BoardVO boardVO ) 
+			@ModelAttribute("boardVO") BoardVO boardVO,
+			@ModelAttribute("memberVO") MemberVO memberVO ) 
 	{
-		System.out.println("***selectBoardList***");
 		//model.addAttribute("BoardVO", boardVO);
 		model.addAttribute("test","jsp test");
-		List<MemberVO> result = boardService.selectBoardList(boardVO);
-		System.out.println("***BoardVO***");
-		System.out.println(result);
-		System.out.println("***BoardVO***");
+		List<MemberVO> result = boardService.selectBoardList(boardVO);		
 		return "board/boardList";
 	}
 	

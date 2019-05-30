@@ -14,12 +14,9 @@ public class MemberDAO {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public MemberVO selectMemberInfo(MemberVO memberVO)
-	{
-		System.out.println("MEMBERDAO");
-		System.out.println(memberVO.getMember_id());
-		System.out.println(memberVO.getMember_password());
-		return sqlSessionTemplate.selectOne("selectMemberInfo", memberVO);
+	public MemberVO selectLoginView(MemberVO memberVO)
+	{		
+		return sqlSessionTemplate.selectOne("selectLoginView", memberVO);
 	}
 	
 

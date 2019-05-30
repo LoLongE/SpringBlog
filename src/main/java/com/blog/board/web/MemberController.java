@@ -19,9 +19,8 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@RequestMapping(value="/selectLoginForm.do")
-	public String insertBoardForm(Model model) 
-	{
-		System.out.println("***selectLoginForm***");
+	public String selectLoginForm(Model model) 
+	{		
 		return "member/login";		
 	}
 	
@@ -29,17 +28,7 @@ public class MemberController {
 	@RequestMapping(value="/selectLoginView.do")
 	public MemberVO selectLoginView(Model model, @ModelAttribute("memberVO") MemberVO memberVO ) 
 	{
-		System.out.println("***selectLoginView***");
-		System.out.println(memberVO.getMember_id());
-		System.out.println(memberVO.getMember_password());
-		memberVO = memberService.selectMemberInfo(memberVO);
-		System.out.println("##############################");
-		System.out.println(memberVO.getMember_id());
-		System.out.println(memberVO.getMember_password());
-		System.out.println(memberVO.getMember_name());
-		System.out.println(memberVO.getMember_phone());
-		System.out.println(memberVO.getMember_email());
-		System.out.println("##############################");
+		memberVO = memberService.selectLoginView(memberVO);
 		//model.addAttribute("memberVO", memberVO);
 		return memberVO;
 	}

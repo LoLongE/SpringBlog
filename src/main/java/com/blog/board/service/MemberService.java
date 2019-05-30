@@ -4,6 +4,6 @@ import com.blog.board.domain.MemberVO;
 
 public interface MemberService {
 	
-	public MemberVO selectMemberInfo(MemberVO memberVO);
+	public MemberVO selectLoginView(MemberVO memberVO);
 	
 }
