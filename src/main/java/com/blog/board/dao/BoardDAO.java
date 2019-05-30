@@ -1,6 +1,7 @@
 package com.blog.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.blog.board.domain.BoardVO;
-import com.blog.board.domain.MemberVO;
 
 @Mapper
 @Repository("BoardDAO")
@@ -17,26 +17,19 @@ public class BoardDAO {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public List<MemberVO> selectBoardList(BoardVO boardVO)
+	public List<BoardVO> selectBoardList(BoardVO boardVO)
 	{
-		return sqlSessionTemplate.selectList("selectBoardList");
+		return sqlSessionTemplate.selectList("selectBoardList", boardVO);
 	}
 	
-
-	//public List<BoardVO> selectBoardList(BoardVO boardVO);
-	/*
+	public List<Map<String,Object>> selectBoardTest01(Map<String,Object> paramMap)
 	{
-		System.out.println("***selectBoardList-DAO***");
-		//return selectList("BoardSql.selectBoardList");
-		//Map<String,Object> paramMap = new HashMap<String,Object>();
-		
-		//Test
-		//connection = getOracle();
-		//Test
-		
-		return sqlSession.selectList("com.blog.board.dao.BoardMapper.selectBoardList", boardVO);
-		//return null;
+		return sqlSessionTemplate.selectList("selectBoardTest01", paramMap);
 	}
-	*/
+	
+	public List<Map<String,Object>> selectBoardTest02(Map<String,Object> paramMap)
+	{
+		return sqlSessionTemplate.selectList("selectBoardTest02", paramMap);
+	}
 	
 }
