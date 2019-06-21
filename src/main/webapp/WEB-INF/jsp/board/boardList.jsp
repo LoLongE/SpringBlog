@@ -71,23 +71,6 @@
 		<div class="huge-top">
 			<button class="btn btn-normal pull-right" id="insert" onclick="">쓰기</button>
 		</div>
-	</div>	
-	<script>
-		$("#btn_login").on("click", function(){
-			var member_id = $("#member_id").val();
-			var member_password = $("#member_password").val();
-			$.ajax({
-				url : "/selectMemberInfo.do",
-				data : { member_id : member_id, member_password : member_password },
-				dataType : "html",
-				error : function(data){					
-					alert("로그인이 실패하였습니다.");
-				},
-				success : function(data){
-					alert("로그인이 성공하였습니다.");
-				}
-			});
-		});
-	</script>
+	</div>		
 </body>
 </html>
