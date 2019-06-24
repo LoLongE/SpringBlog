@@ -32,7 +32,7 @@ public class BlogController {
 				return "blog/blogLogin";
 			} else {
 				model.addAttribute("memberVO", memberVO);
-				return "blog/blogList";
+				return "redirect:/testBoardList.do";
 			}
 		} catch (Exception e) {
 			return "blog/blogLogin";

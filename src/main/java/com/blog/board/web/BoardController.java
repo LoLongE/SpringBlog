@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.blog.board.domain.BoardVO;
 import com.blog.board.domain.MemberVO;
+import com.blog.board.domain.PagingVO;
 import com.blog.board.service.BoardService;
 
 @Controller
@@ -54,5 +55,20 @@ public class BoardController {
 	{
 		System.out.println("***insertBoardForm***");
 		return "board/boardWrite";		
+	}
+	
+	@RequestMapping(value="/testBoardList.do")
+	public String testBoardList(Model model, 
+			@ModelAttribute("boardVO") BoardVO boardVO,
+			@ModelAttribute("memberVO") MemberVO memberVO  )
+	{
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		List<Map<String,Object>> listMap = boardService.selectBoardTest02(paramMap);		
+		PagingVO pagingVO = new PagingVO((Integer)listMap.get(0).get("totalCount"), 1, 10, 10);
+		model.addAttribute("pagingVO",pagingVO);
+		model.addAttribute("listMap",listMap);
+		System.out.println(listMap.get(0));
+		System.out.println(listMap.get(1));
+		return "blog/blogList";
 	}
 }

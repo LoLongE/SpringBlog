@@ -26,11 +26,12 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value="/selectLoginView.do")
-	public MemberVO selectLoginView(Model model, @ModelAttribute("memberVO") MemberVO memberVO ) 
+	public String selectLoginView(Model model, @ModelAttribute("memberVO") MemberVO memberVO ) 
 	{
 		memberVO = memberService.selectLoginView(memberVO);
+		System.out.println(memberVO);
 		//model.addAttribute("memberVO", memberVO);
-		return memberVO;
+		return "redirect:/testBoardList.do";
 	}
 	
 }

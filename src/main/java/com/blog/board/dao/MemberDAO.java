@@ -15,8 +15,14 @@ public class MemberDAO {
 	SqlSessionTemplate sqlSessionTemplate;
 	
 	public MemberVO selectLoginView(MemberVO memberVO)
-	{		
+	{				
 		return sqlSessionTemplate.selectOne("selectLoginView", memberVO);
+	}
+	public void selectLoginView_TEST()
+	{			
+		System.out.println("aaass");
+		sqlSessionTemplate.selectOne("selectLoginView_TEST");
+		
 	}
 	
 

@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 
@@ -22,7 +24,6 @@
 </head>
 
 <body id="page-top">
-
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
     <a class="navbar-brand mr-1" href="#">우정♡지혁</a>
@@ -132,27 +133,16 @@
                 </thead>
                 
                 <tbody>
-                  <tr>
-                    <td>3</td>
-                    <td>제목입니드아아아아아아</td>
-                    <td>노동현</td>
-                    <td>2019-06-20</td>
-                    <td>0</td>                   
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>제목목목목입니드아아아아아아</td>
-                    <td>노동현</td>
-                    <td>2019-06-20</td>
-                    <td>0</td>                   
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>제목입니으드아아아아아아</td>
-                    <td>이우정</td>
-                    <td>2019-06-19</td>
-                    <td>0</td>                   
-                  </tr>            
+                                   
+                  <c:forEach items="${listMap}" var="result" varStatus="status">
+                  	<tr>
+                    	<td>${result.BoardVO.board_no}</td>
+                    	<td>${result.BoardVO.board_title}</td>
+                    	<td>${result.BoardVO.board_regist_id}</td>
+                    	<td>${result.BoardVO.board_regist_date}</td>
+                    	<td>0</td>                   
+                  	</tr>	
+                  </c:forEach>
                 </tbody>
               </table>
             </div>
