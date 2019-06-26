@@ -26,6 +26,12 @@ repositories {
 	maven() { url "https://maven.atlassian.com/3rdparty/" }
 }
 
+task print() {
+	doLast {
+		println "github push complete"
+	}
+}
+
 dependencies {
 	//compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
