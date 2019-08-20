@@ -39,6 +39,7 @@
                         ,ROW_NUMBER() OVER(ORDER BY BOARD_NO DESC) rn 
                         ,COUNT(1) OVER() totalCount
                    FROM BOARD )
+		WHERE rn BETWEEN #{pagingVO.startRownum} AND #{pagingVO.endRownum}                   
 	</select>
 	
 </mapper>

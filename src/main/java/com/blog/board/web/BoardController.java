@@ -8,8 +8,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.blog.board.domain.BoardVO;
 import com.blog.board.domain.MemberVO;
@@ -25,28 +27,17 @@ public class BoardController {
 	@RequestMapping(value="/selectBoardList.do")
 	public String selectBoardList(Model model,
 			@ModelAttribute("boardVO") BoardVO boardVO,
-			@ModelAttribute("memberVO") MemberVO memberVO ) 
+			@ModelAttribute("memberVO") MemberVO memberVO,
+			@RequestParam(value="totalCount", defaultValue="0") int totalCount,
+			@RequestParam(value="pageNo", defaultValue="1") int pageNo) 
 	{
-		//model.addAttribute("BoardVO", boardVO);
-		//model.addAttribute("test","jsp test");
-		List<BoardVO> result = boardService.selectBoardList(boardVO);		
-		System.out.println(result);
-		System.out.println("empty : " + result.isEmpty());
-		System.out.println("size : " + result.size());
-		System.out.println("get0 : " + result.get(0));
-		System.out.println("get1 : " + result.get(1));
-		System.out.println("get2 : " + result.get(2));
-
-		Map<String,Object> paramMap = new HashMap<String,Object>();
-		List<Map<String,Object>> listMap01 = boardService.selectBoardTest01(paramMap);
-		
-		List<Map<String,Object>> listMap02 = boardService.selectBoardTest02(paramMap);
-		System.out.println(listMap02);
-		System.out.println(listMap02.size());
-		System.out.println(listMap02.get(0).get("rn"));
-		System.out.println(listMap02.get(0).get("totalCount"));
-		System.out.println(listMap02.get(0).get("BoardVO"));
-		
+		Map<String,Object> paramMap = new HashMap<String,Object>();		
+		PagingVO pagingVO = new PagingVO(totalCount, pageNo, 10, 10);
+		paramMap.put("pagingVO", pagingVO);
+		List<Map<String,Object>> result = boardService.selectBoardTest02(paramMap);		
+		pagingVO.setTotalCount((int)result.get(0).get("totalCount"));
+		model.addAttribute("result",result);
+		model.addAttribute("pagingVO",pagingVO);
 		return "board/boardList";
 	}
 	
@@ -57,18 +48,4 @@ public class BoardController {
 		return "board/boardWrite";		
 	}
 	
-	@RequestMapping(value="/testBoardList.do")
-	public String testBoardList(Model model, 
-			@ModelAttribute("boardVO") BoardVO boardVO,
-			@ModelAttribute("memberVO") MemberVO memberVO  )
-	{
-		Map<String,Object> paramMap = new HashMap<String,Object>();
-		List<Map<String,Object>> listMap = boardService.selectBoardTest02(paramMap);		
-		PagingVO pagingVO = new PagingVO((Integer)listMap.get(0).get("totalCount"), 1, 10, 10);
-		model.addAttribute("pagingVO",pagingVO);
-		model.addAttribute("listMap",listMap);
-		System.out.println(listMap.get(0));
-		System.out.println(listMap.get(1));
-		return "blog/blogList";
-	}
 }

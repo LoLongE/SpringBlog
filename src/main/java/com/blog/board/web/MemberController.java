@@ -28,9 +28,7 @@ public class MemberController {
 	@RequestMapping(value="/selectLoginView.do")
 	public String selectLoginView(Model model, @ModelAttribute("memberVO") MemberVO memberVO ) 
 	{
-		memberVO = memberService.selectLoginView(memberVO);
-		System.out.println(memberVO);
-		//model.addAttribute("memberVO", memberVO);
+		memberVO = memberService.selectLoginView(memberVO);		
 		return "redirect:/testBoardList.do";
 	}
 	

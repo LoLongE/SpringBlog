@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c"  uri = "http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -52,25 +54,61 @@
 					<th style="test-align:center;">작성자</th>
 					<th style="test-align:center;">작성일</th>
 					<th style="test-align:center;">조회수</th>
-				</tr>
-				<tr>
-					<td style="text-align:center;">12</td>
-					<td>Test 게시글</td>
-					<td style="text-align:center;"></td>
-					<td style="text-align:center;">2018-01-29</td>
-					<td style="text-align:center;">0</td>
-				</tr>
-				<tr>
-					<td style="text-align:center;">8</td>
-					<td>Test 게시글</td>
-					<td style="text-align:center;"></td>
-					<td style="text-align:center;">2018-01-30</td>
-					<td style="text-align:center;">0</td>
-				</tr>
+				</tr>			
+				 <c:forEach items="${result}" var="result" varStatus="status">
+                  	<tr>
+                    	<td>${result.BoardVO.board_no}</td>
+                    	<td>${result.BoardVO.board_title}</td>
+                    	<td>${result.BoardVO.board_regist_id}</td>
+                    	<td>${result.BoardVO.board_regist_date}</td>
+                    	<td>0</td>                   
+                  	</tr>	
+                  </c:forEach>
 		</table>
-		<div class="huge-top">
-			<button class="btn btn-normal pull-right" id="insert" onclick="">쓰기</button>
-		</div>
+		<hr/>
+		<a class ="btn btn-default pull-right">글쓰기</a>
+		<div class="text-center">
+			<ul class="pagination">
+				<c:choose>
+					<c:when test="${ pagingVO.prevCheck() }" >
+						<li><a href="#" onClick="paging('1')">처음</a><li>
+						<li><a href="#" onClick="paging('${pagingVO.prev()}')">이전</a><li>
+					</c:when>
+					<c:otherwise>
+				
+					</c:otherwise>
+				</c:choose>
+				
+				<c:forEach var="idx" begin="${pagingVO.startPage}" end="${pagingVO.endPage}">
+					<c:choose>
+						<c:when test="${ idx eq pagingVO.pageNo }">
+							<li><a href="#" onClick="paging('${idx}')">${idx}</a><li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="#" onClick="paging('${idx}')">${idx}</a><li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>    
+				
+				<c:choose>
+					<c:when test="${ pagingVO.nextCheck() }" >
+						<li><a href="#" onClick="paging('${pagingVO.next()}')">다음</a><li>
+						<li><a href="#" onClick="paging('${pagingVO.totalPage()}')">끝</a><li>
+					</c:when>
+					<c:otherwise>
+				
+					</c:otherwise>
+				</c:choose>
+				
+			</ul>
+		</div>		       
 	</div>		
+<script type="text/javascript">
+function paging(pageNo) {
+	location.href="/selectBoardList.do?pageNo="+pageNo;		
+}
+</script>
+	
 </body>
+
 </html>
